@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mahendra Nayak – Data & Software Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0f0f0f;
+    --ink-muted: #4a4a4a;
+    --ink-faint: #888;
+    --bg: #f5f3ee;
+    --surface: #ffffff;
+    --accent: #1a3a2a;
+    --accent-light: #e8f2ec;
+    --accent-mid: #2d6a4a;
+    --border: rgba(15,15,15,0.12);
+    --border-strong: rgba(15,15,15,0.25);
+    --tag-bg: #1a3a2a;
+    --tag-text: #e8f2ec;
+    --highlight: #c8e6c9;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+    font-size: 16px;
+    overflow-x: hidden;
+  }
+
+  /* ── HEADER / HERO ── */
+  header {
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    background: var(--accent);
+    color: #f0ede6;
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      repeating-linear-gradient(0deg, transparent, transparent 59px, rgba(255,255,255,0.04) 60px),
+      repeating-linear-gradient(90deg, transparent, transparent 59px, rgba(255,255,255,0.04) 60px);
+    pointer-events: none;
+  }
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 4rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: #f0ede6;
+    text-decoration: none;
+  }
+
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a { color: rgba(240,237,230,0.7); text-decoration: none; font-size: 0.875rem; font-weight: 400; letter-spacing: 0.04em; transition: color 0.2s; }
+  .nav-links a:hover { color: #f0ede6; }
+
+  .hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 4rem 4rem 6rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.8rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(240,237,230,0.55);
+    margin-bottom: 1.5rem;
+    font-weight: 400;
+  }
+
+  .hero-name {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(3.5rem, 9vw, 8rem);
+    font-weight: 800;
+    line-height: 0.92;
+    letter-spacing: -0.03em;
+    color: #f0ede6;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-name span {
+    color: #7ec8a0;
+  }
+
+  .hero-tagline {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: rgba(240,237,230,0.65);
+    max-width: 540px;
+    line-height: 1.7;
+    font-weight: 300;
+    margin-bottom: 3rem;
+  }
+
+  .hero-cta-row {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: #7ec8a0;
+    color: #0f2018;
+    padding: 0.85rem 2.2rem;
+    border-radius: 3px;
+    font-weight: 500;
+    font-size: 0.875rem;
+    letter-spacing: 0.03em;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: #9fd9b8; transform: translateY(-1px); }
+
+  .btn-ghost {
+    border: 1px solid rgba(240,237,230,0.3);
+    color: rgba(240,237,230,0.8);
+    padding: 0.85rem 2.2rem;
+    border-radius: 3px;
+    font-weight: 400;
+    font-size: 0.875rem;
+    letter-spacing: 0.03em;
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s;
+    display: inline-block;
+  }
+  .btn-ghost:hover { border-color: rgba(240,237,230,0.7); color: #f0ede6; }
+
+  .hero-stats {
+    position: absolute;
+    bottom: 4rem;
+    right: 4rem;
+    display: flex;
+    gap: 3rem;
+  }
+
+  .stat { text-align: right; }
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #7ec8a0;
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.75rem;
+    color: rgba(240,237,230,0.5);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-top: 0.25rem;
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 6rem 4rem; }
+  .section-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent-mid);
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    line-height: 1.1;
+    margin-bottom: 3rem;
+  }
+
+  /* ── ABOUT ── */
+  #about { background: var(--surface); }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+  .about-text p {
+    color: var(--ink-muted);
+    line-height: 1.8;
+    margin-bottom: 1.25rem;
+    font-size: 1.05rem;
+    font-weight: 300;
+  }
+  .contact-chips {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 2rem;
+  }
+  .contact-chip {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.9rem;
+    color: var(--ink-muted);
+  }
+  .contact-chip .chip-icon {
+    width: 36px;
+    height: 36px;
+    background: var(--accent-light);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+  }
+  .contact-chip a { color: var(--accent-mid); text-decoration: none; }
+  .contact-chip a:hover { text-decoration: underline; }
+
+  .progression {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .prog-item {
+    display: flex;
+    gap: 1.25rem;
+    padding-bottom: 2rem;
+    position: relative;
+  }
+  .prog-item:not(:last-child)::before {
+    content: '';
+    position: absolute;
+    left: 14px;
+    top: 28px;
+    bottom: 0;
+    width: 1px;
+    background: var(--border);
+  }
+  .prog-dot {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .prog-dot.current { background: #7ec8a0; }
+  .prog-dot svg { width: 12px; height: 12px; fill: white; }
+  .prog-info {}
+  .prog-role {
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--ink);
+  }
+  .prog-period { font-size: 0.8rem; color: var(--ink-faint); margin-top: 0.15rem; }
+
+  /* ── EXPERIENCE ── */
+  #experience { background: var(--bg); }
+
+  .exp-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2.5rem;
+    margin-bottom: 1.5rem;
+    transition: border-color 0.2s, transform 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .exp-card:hover { border-color: var(--border-strong); transform: translateY(-2px); }
+  .exp-card.current::before {
+    content: 'CURRENT';
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    color: var(--accent-mid);
+    border: 1px solid var(--accent-mid);
+    padding: 0.2rem 0.5rem;
+    border-radius: 2px;
+  }
+  .exp-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .exp-company-badge {
+    width: 48px;
+    height: 48px;
+    background: var(--accent-light);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+  .exp-meta {}
+  .exp-role {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .exp-company { font-size: 0.9rem; color: var(--accent-mid); font-weight: 500; margin-top: 0.1rem; }
+  .exp-period { font-size: 0.8rem; color: var(--ink-faint); margin-top: 0.15rem; }
+
+  .exp-bullets { list-style: none; }
+  .exp-bullets li {
+    padding: 0.6rem 0;
+    padding-left: 1.25rem;
+    position: relative;
+    color: var(--ink-muted);
+    font-size: 0.95rem;
+    line-height: 1.65;
+    border-bottom: 1px solid var(--border);
+  }
+  .exp-bullets li:last-child { border-bottom: none; }
+  .exp-bullets li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent-mid);
+    font-size: 0.8rem;
+    top: 0.65rem;
+  }
+
+  /* ── SKILLS ── */
+  #skills { background: var(--accent); color: #f0ede6; }
+  #skills .section-label { color: #7ec8a0; }
+  #skills .section-title { color: #f0ede6; }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+  .skill-group {
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 4px;
+    padding: 1.75rem;
+    background: rgba(255,255,255,0.04);
+    transition: background 0.2s;
+  }
+  .skill-group:hover { background: rgba(255,255,255,0.07); }
+  .skill-group-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #7ec8a0;
+    margin-bottom: 1rem;
+  }
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .skill-tag {
+    background: rgba(255,255,255,0.08);
+    color: rgba(240,237,230,0.85);
+    padding: 0.35rem 0.75rem;
+    border-radius: 2px;
+    font-size: 0.8rem;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+  }
+
+  /* ── PROJECTS ── */
+  #projects { background: var(--surface); }
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+  }
+  .project-card {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2rem;
+    background: var(--bg);
+    transition: border-color 0.2s, transform 0.2s;
+    display: flex;
+    flex-direction: column;
+  }
+  .project-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+  .project-icon {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+    filter: grayscale(0.2);
+  }
+  .project-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+  }
+  .project-desc {
+    font-size: 0.9rem;
+    color: var(--ink-muted);
+    line-height: 1.65;
+    flex: 1;
+    font-weight: 300;
+  }
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 1.25rem;
+  }
+  .project-tag {
+    background: var(--accent-light);
+    color: var(--accent-mid);
+    font-size: 0.72rem;
+    padding: 0.25rem 0.6rem;
+    border-radius: 2px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+
+  /* ── EDUCATION ── */
+  #education { background: var(--bg); }
+  .edu-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+  }
+  .edu-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.75rem;
+  }
+  .edu-degree {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--ink);
+    margin-bottom: 0.35rem;
+  }
+  .edu-school { font-size: 0.875rem; color: var(--accent-mid); margin-bottom: 0.5rem; font-weight: 500; }
+  .edu-meta { font-size: 0.8rem; color: var(--ink-faint); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    color: rgba(255,255,255,0.5);
+    padding: 3rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: rgba(255,255,255,0.85);
+  }
+  .footer-right { font-size: 0.85rem; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .fade-up { animation: fadeUp 0.7s ease forwards; }
+  .delay-1 { animation-delay: 0.1s; opacity: 0; }
+  .delay-2 { animation-delay: 0.25s; opacity: 0; }
+  .delay-3 { animation-delay: 0.4s; opacity: 0; }
+  .delay-4 { animation-delay: 0.55s; opacity: 0; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav, section, footer { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .hero { padding: 2rem 1.5rem 5rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .hero-stats { position: static; margin-top: 3rem; flex-direction: row; }
+    nav { padding: 1.5rem; }
+    .nav-links { display: none; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <nav>
+    <a href="#" class="nav-logo">MN</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#education">Education</a></li>
+    </ul>
+  </nav>
+
+  <div class="hero">
+    <p class="hero-eyebrow fade-up">Available for opportunities</p>
+    <h1 class="hero-name fade-up delay-1">Mahendra<br><span>Nayak</span></h1>
+    <p class="hero-tagline fade-up delay-2">Data Engineer & Software Engineer building scalable ETL pipelines, cloud automation, and web scraping systems across AWS, GCP, and Azure.</p>
+    <div class="hero-cta-row fade-up delay-3">
+      <a href="mailto:mahinnayak186@gmail.com" class="btn-primary">Get in Touch</a>
+      <a href="https://linkedin.com/in/mahendra-nayak-37b228246" class="btn-ghost">LinkedIn Profile</a>
+    </div>
+
+    <div class="hero-stats fade-up delay-4">
+      <div class="stat">
+        <div class="stat-num">2+</div>
+        <div class="stat-label">Years Exp.</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">3</div>
+        <div class="stat-label">Cloud Platforms</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">22+</div>
+        <div class="stat-label">Sites Scraped</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-text">
+      <p class="section-label">About Me</p>
+      <h2 class="section-title">Engineer who builds things that scale.</h2>
+      <p>I'm a Data & Software Engineer at DataGrokr, Bangalore, with a track record of designing robust data pipelines, migrating cloud workloads, and shipping production-grade automation solutions.</p>
+      <p>In 2+ years I've progressed from Intern to Data Engineer to Software Engineer I — taking full ownership of ETL systems, scraping frameworks, and cloud architecture decisions across AWS, GCP, and Azure.</p>
+      <p>I'm passionate about turning messy data into clean, structured insights — and I do it with Python, SQL, and whatever cloud service gets the job done best.</p>
+
+      <div class="contact-chips">
+        <div class="contact-chip">
+          <div class="chip-icon">✉</div>
+          <a href="mailto:mahinnayak186@gmail.com">mahinnayak186@gmail.com</a>
+        </div>
+        <div class="contact-chip">
+          <div class="chip-icon">📞</div>
+          <span>+91 8722475946</span>
+        </div>
+        <div class="contact-chip">
+          <div class="chip-icon">📍</div>
+          <span>Bangalore, Karnataka</span>
+        </div>
+        <div class="contact-chip">
+          <div class="chip-icon">🔗</div>
+          <a href="https://linkedin.com/in/mahendra-nayak-37b228246" target="_blank">linkedin.com/in/mahendra-nayak-37b228246</a>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <p class="section-label" style="margin-bottom: 1.5rem;">Career Progression</p>
+      <div class="progression">
+        <div class="prog-item">
+          <div class="prog-dot current">
+            <svg viewBox="0 0 12 12"><circle cx="6" cy="6" r="4"/></svg>
+          </div>
+          <div class="prog-info">
+            <div class="prog-role">Software Engineer I</div>
+            <div class="prog-period">DataGrokr · Jan 2026 – Present</div>
+          </div>
+        </div>
+        <div class="prog-item">
+          <div class="prog-dot">
+            <svg viewBox="0 0 12 12"><circle cx="6" cy="6" r="4"/></svg>
+          </div>
+          <div class="prog-info">
+            <div class="prog-role">Data Engineer</div>
+            <div class="prog-period">DataGrokr · Aug 2024 – Jan 2026</div>
+          </div>
+        </div>
+        <div class="prog-item">
+          <div class="prog-dot">
+            <svg viewBox="0 0 12 12"><circle cx="6" cy="6" r="4"/></svg>
+          </div>
+          <div class="prog-info">
+            <div class="prog-role">Data Engineering Intern</div>
+            <div class="prog-period">DataGrokr · Feb 2024 – Aug 2024</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <p class="section-label">Work Experience</p>
+  <h2 class="section-title">Where I've worked.</h2>
+
+  <div class="exp-card current">
+    <div class="exp-header">
+      <div class="exp-company-badge">DG</div>
+      <div class="exp-meta">
+        <div class="exp-role">Software Engineer I</div>
+        <div class="exp-company">DataGrokr</div>
+        <div class="exp-period">January 2026 – Present · Bangalore</div>
+      </div>
+    </div>
+    <ul class="exp-bullets">
+      <li>Building a US Garage Door Installer Directory using Yelp & Google Places API across top 50 metro areas — extracting, ranking, and deduplicating business data at scale.</li>
+      <li>Designing scalable cloud architectures and contributing to code reviews and technical documentation.</li>
+    </ul>
+  </div>
+
+  <div class="exp-card">
+    <div class="exp-header">
+      <div class="exp-company-badge">DG</div>
+      <div class="exp-meta">
+        <div class="exp-role">Data Engineer</div>
+        <div class="exp-company">DataGrokr</div>
+        <div class="exp-period">August 2024 – January 2026 · Bangalore</div>
+      </div>
+    </div>
+    <ul class="exp-bullets">
+      <li>Led Playwright-based scraping for 22 competitor websites; standardized team-wide code template, conducted KT for interns, and delivered the full initiative in 2–3 weeks.</li>
+      <li>Migrated batch scraping pipelines from GCP to AWS (S3, Batch, Lambda, ECR, Step Functions) to resolve performance issues; scraped 3 major industrial manufacturers in the electrical components sector.</li>
+      <li>Reverse-engineered Azure Data Factory T-SQL pipelines and independently produced a system architecture diagram that matched the original developer's design.</li>
+      <li>Built AWS ETL pipeline (S3 → Glue → Lambda → PostgreSQL RDS) with CloudFormation for a client data ingestion project; automated hourly data ingestion from scratch.</li>
+      <li>Delivered complex SQL analytics for a financial services client — merchant transaction reports, population cohort analysis (2.6M cards, 2.1M persons), and demographic fill-rate metrics.</li>
+      <li>Automated B2B contact enrichment pipeline with 2FA handling (pyotp) + Google API + AWS Step Functions; significantly improved data hit rate over prior manual processes.</li>
+      <li>Built GTIN enrichment table from 4 competitor websites, identifying net-new product IDs absent from client's item master; enhanced product data completeness.</li>
+    </ul>
+  </div>
+
+  <div class="exp-card">
+    <div class="exp-header">
+      <div class="exp-company-badge">DG</div>
+      <div class="exp-meta">
+        <div class="exp-role">Data Engineering Intern</div>
+        <div class="exp-company">DataGrokr</div>
+        <div class="exp-period">February 2024 – August 2024 · Bangalore</div>
+      </div>
+    </div>
+    <ul class="exp-bullets">
+      <li>Developed foundational skills in Apache Spark, AWS, GCP, Python, and SQL through hands-on project work.</li>
+      <li>Built Power BI reports and dashboards to support business decision-making.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <p class="section-label">Technical Skills</p>
+  <h2 class="section-title">My tech stack.</h2>
+
+  <div class="skills-grid">
+    <div class="skill-group">
+      <div class="skill-group-title">Cloud & Infrastructure</div>
+      <div class="skill-tags">
+        <span class="skill-tag">AWS S3</span>
+        <span class="skill-tag">AWS Glue</span>
+        <span class="skill-tag">Lambda</span>
+        <span class="skill-tag">Athena</span>
+        <span class="skill-tag">ECR</span>
+        <span class="skill-tag">Batch</span>
+        <span class="skill-tag">Step Functions</span>
+        <span class="skill-tag">CloudFormation</span>
+        <span class="skill-tag">RDS</span>
+        <span class="skill-tag">GCP BigQuery</span>
+        <span class="skill-tag">Cloud Workflows</span>
+        <span class="skill-tag">Azure ADF</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Languages & Databases</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">SQL</span>
+        <span class="skill-tag">PostgreSQL</span>
+        <span class="skill-tag">T-SQL</span>
+        <span class="skill-tag">BigQuery SQL</span>
+        <span class="skill-tag">Docker</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Web Scraping</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Playwright</span>
+        <span class="skill-tag">Selenium</span>
+        <span class="skill-tag">Anti-bot Bypass</span>
+        <span class="skill-tag">CAPTCHA Handling</span>
+        <span class="skill-tag">Shadow DOM</span>
+        <span class="skill-tag">2FA (pyotp)</span>
+        <span class="skill-tag">Bright Data</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">AI & APIs</div>
+      <div class="skill-tags">
+        <span class="skill-tag">LangChain</span>
+        <span class="skill-tag">OpenAI API</span>
+        <span class="skill-tag">Prompt Engineering</span>
+        <span class="skill-tag">SerpAPI</span>
+        <span class="skill-tag">Google Places API</span>
+        <span class="skill-tag">Yelp API</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Analytics & BI</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Power BI</span>
+        <span class="skill-tag">Apache Spark</span>
+        <span class="skill-tag">Bookmarks</span>
+        <span class="skill-tag">Dynamic Params</span>
+        <span class="skill-tag">Custom Tooltips</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">DevOps & Tools</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Git</span>
+        <span class="skill-tag">GitHub</span>
+        <span class="skill-tag">CI/CD</span>
+        <span class="skill-tag">Docker</span>
+        <span class="skill-tag">Linux</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <p class="section-label">Featured Work</p>
+  <h2 class="section-title">Projects I'm proud of.</h2>
+
+  <div class="projects-grid">
+    <div class="project-card">
+      <div class="project-icon">🗂️</div>
+      <div class="project-title">US Garage Door Installer Directory</div>
+      <p class="project-desc">Large-scale business data extraction across top 50 US metro areas using Yelp & Google Places API. Includes ranking, deduplication, and cloud storage at scale.</p>
+      <div class="project-tags">
+        <span class="project-tag">Yelp API</span>
+        <span class="project-tag">Google Places API</span>
+        <span class="project-tag">AWS</span>
+        <span class="project-tag">Python</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-icon">⚡</div>
+      <div class="project-title">GCP → AWS Pipeline Migration</div>
+      <p class="project-desc">Migrated batch scraping pipelines from GCP to AWS (S3, Batch, Lambda, ECR, Step Functions), resolving performance bottlenecks for 3 major industrial manufacturers in the electrical components sector.</p>
+      <div class="project-tags">
+        <span class="project-tag">AWS Step Functions</span>
+        <span class="project-tag">Lambda</span>
+        <span class="project-tag">ECR</span>
+        <span class="project-tag">GCP</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-icon">🔁</div>
+      <div class="project-title">Client ETL Pipeline (CloudFormation)</div>
+      <p class="project-desc">Built end-to-end AWS ETL pipeline (S3 → Glue → Lambda → PostgreSQL RDS) with CloudFormation IaC. Automated hourly data ingestion from scratch, eliminating manual overhead entirely.</p>
+      <div class="project-tags">
+        <span class="project-tag">AWS Glue</span>
+        <span class="project-tag">CloudFormation</span>
+        <span class="project-tag">PostgreSQL</span>
+        <span class="project-tag">Lambda</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-icon">📊</div>
+      <div class="project-title">Financial Services Cohort Analytics</div>
+      <p class="project-desc">Complex SQL analytics for merchant transaction reports and population cohort analysis at scale — 2.6M cards and 2.1M persons. Delivered demographic fill-rate metrics for business insight.</p>
+      <div class="project-tags">
+        <span class="project-tag">PostgreSQL</span>
+        <span class="project-tag">SQL Analytics</span>
+        <span class="project-tag">Cohort Analysis</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-icon">🤖</div>
+      <div class="project-title">B2B Contact Enrichment Automation</div>
+      <p class="project-desc">Automated contact enrichment pipeline with 2FA handling (pyotp), integrated with Google API and AWS Step Functions. Significantly improved data hit rate over previous manual processes.</p>
+      <div class="project-tags">
+        <span class="project-tag">pyotp</span>
+        <span class="project-tag">Playwright</span>
+        <span class="project-tag">Step Functions</span>
+        <span class="project-tag">Google API</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-icon">🏗️</div>
+      <div class="project-title">Product Data Enrichment (GTIN)</div>
+      <p class="project-desc">Built a GTIN enrichment table from 4 competitor websites, identifying net-new product IDs absent from the client's item master. Improved product catalogue completeness with zero manual effort.</p>
+      <div class="project-tags">
+        <span class="project-tag">Playwright</span>
+        <span class="project-tag">Python</span>
+        <span class="project-tag">SQL</span>
+        <span class="project-tag">Data Enrichment</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <p class="section-label">Education</p>
+  <h2 class="section-title">Academic background.</h2>
+  <div class="edu-row">
+    <div class="edu-card">
+      <div class="edu-degree">B.E. – Electronics & Communication Engineering</div>
+      <div class="edu-school">BMS College of Engineering, Bangalore</div>
+      <div class="edu-meta">CGPA: 7.7 &nbsp;·&nbsp; Graduated 2024</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-degree">PUC (Pre-University)</div>
+      <div class="edu-school">Sarada PU College</div>
+      <div class="edu-meta">Score: 89% &nbsp;·&nbsp; 2020</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-degree">SSLC (Secondary School)</div>
+      <div class="edu-school">Saint Zakariya High School</div>
+      <div class="edu-meta">Score: 86.4% &nbsp;·&nbsp; 2018</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-name">Mahendra Nayak</div>
+  <div class="footer-right">mahinnayak186@gmail.com &nbsp;·&nbsp; Bangalore, India</div>
+</footer>
+
+</body>
+</html>
